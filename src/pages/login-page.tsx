@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 
 import { useAuth } from "@/contexts/auth-context";
+import { LanguageSwitcher } from "@/components/language-switcher";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 export function LoginPage() {
+  const { t } = useTranslation();
   const { login, isAdmin, loading } = useAuth();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -26,10 +29,10 @@ export function LoginPage() {
     try {
       const result = await login(email, password);
       if (result.ok) {
-        toast.success("Đăng nhập thành công");
+        toast.success(t("login.success"));
         navigate("/", { replace: true });
       } else {
-        toast.error(result.error ?? "Không thể đăng nhập");
+        toast.error(result.error ?? t("login.error"));
       }
     } finally {
       setPending(false);
@@ -39,20 +42,21 @@ export function LoginPage() {
   if (loading) {
     return (
       <div className="flex min-h-[40vh] items-center justify-center text-muted-foreground">
-        Đang tải…
+        {t("login.loading")}
       </div>
     );
   }
 
   return (
     <div className="mx-auto flex min-h-[60vh] max-w-md flex-col justify-center px-4 py-16">
-      <h1 className="font-display text-3xl font-semibold">Đăng nhập quản trị</h1>
-      <p className="mt-2 text-sm text-muted-foreground">
-        Chỉ tài khoản được gắn quyền quản trị trong hệ thống mới vào được.
-      </p>
+      <div className="mb-6 flex justify-end">
+        <LanguageSwitcher />
+      </div>
+      <h1 className="font-display text-3xl font-semibold">{t("login.title")}</h1>
+      <p className="mt-2 text-sm text-muted-foreground">{t("login.subtitle")}</p>
       <form onSubmit={onSubmit} className="mt-8 space-y-4">
         <div className="space-y-2">
-          <Label htmlFor="email">Email</Label>
+          <Label htmlFor="email">{t("login.email")}</Label>
           <Input
             id="email"
             type="email"
@@ -63,7 +67,7 @@ export function LoginPage() {
           />
         </div>
         <div className="space-y-2">
-          <Label htmlFor="password">Mật khẩu</Label>
+          <Label htmlFor="password">{t("login.password")}</Label>
           <Input
             id="password"
             type="password"
@@ -74,7 +78,7 @@ export function LoginPage() {
           />
         </div>
         <Button type="submit" className="w-full" disabled={pending}>
-          {pending ? "Đang xử lý…" : "Đăng nhập"}
+          {pending ? t("login.submitting") : t("login.submit")}
         </Button>
       </form>
     </div>
