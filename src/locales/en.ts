@@ -1,0 +1,31 @@
+export default {
+  admin: {
+    brand: "Admin",
+    logout: "Log out",
+    groups: {
+      content: "Content",
+      users: "Users",
+      engagement: "Engagement",
+    },
+    posts: "Posts",
+    tags: "Tags",
+    publications: "Publications",
+    comments: "Comments",
+    users: "Users",
+    likes: "Likes",
+    bookmarks: "Bookmarks",
+    follows: "Follows",
+    notifications: "Notifications",
+  },
+  login: {
+    title: "Admin sign in",
+    subtitle: "Only accounts with admin privileges in the system can access this area.",
+    email: "Email",
+    password: "Password",
+    submit: "Sign in",
+    submitting: "Processing…",
+    loading: "Loading…",
+    success: "Signed in successfully",
+    error: "Could not sign in",
+  },
+} as const;
