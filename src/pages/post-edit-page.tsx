@@ -107,7 +107,7 @@ export function PostEditPage() {
       };
       await patchPost(postId, payload);
       toast.success("Đã lưu bài");
-      navigate("/");
+      navigate("/posts");
     } catch (err) {
       const msg = err instanceof Error ? err.message : "Lưu thất bại";
       toast.error(msg);
@@ -126,7 +126,7 @@ export function PostEditPage() {
         <p className="text-destructive" role="alert">
           {loadError}
         </p>
-        <Link to="/" className={cn(buttonVariants({ variant: "outline" }))}>
+        <Link to="/posts" className={cn(buttonVariants({ variant: "outline" }))}>
           Về danh sách
         </Link>
       </div>
@@ -148,7 +148,7 @@ export function PostEditPage() {
           </p>
         </div>
         <div className="flex gap-2">
-          <Link to="/" className={cn(buttonVariants({ variant: "outline" }))}>
+          <Link to="/posts" className={cn(buttonVariants({ variant: "outline" }))}>
             Hủy
           </Link>
           <Button type="submit" disabled={saving}>
@@ -269,7 +269,7 @@ export function PostEditPage() {
           </div>
         </CardContent>
         <CardFooter className="justify-end gap-2 border-t">
-          <Link to="/" className={cn(buttonVariants({ variant: "outline" }))}>
+          <Link to="/posts" className={cn(buttonVariants({ variant: "outline" }))}>
             Hủy
           </Link>
           <Button type="submit" disabled={saving}>
